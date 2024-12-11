@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:4.0
+FN:Varun Sharma
+N:Sharma;Varun;;;
+TITLE:Adventure Curator
+ORG:Paxo Travels
+TEL;TYPE=work,voice;VALUE=uri:tel:+918003699526
+EMAIL:paxotravels@gmail.com
+URL:https://instagram.com/paxotravels
+PHOTO;VALUE=uri:https://www.dropbox.com/scl/fi/rl658pssugdvroiu0vlkh/Untitled-design-3.png?rlkey=20zto69rlxuj3bpc010b3d4bv&st=qoqvczv5&dl=1
+X-SOCIALPROFILE;TYPE=Instagram:https://instagram.com/paxotravels
+X-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/918003699526
+NOTE:Adventure Curator at Paxo Travels.
+END:VCARD
