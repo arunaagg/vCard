@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Card with vCard</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- Import Font Awesome for the icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
@@ -130,7 +129,6 @@
       font-size: 20px;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -164,15 +162,15 @@
     <div id="qrcode"></div>
   </div>
   <div style="text-align: center; padding: 15px;">
-    <span class="add-to-contact" onclick="window.location.href = 'vcard.vcf'">
+    <span class="add-to-contact" onclick="downloadVCard()">
       <i class="fa fa-user-plus"></i> <!-- Icon with "+" and a person -->
     </span>
   </div>
 </div>
 
 <script>
-  // Define vCard content without address
-  const vcardContent = `BEGIN:VCARD
+  function downloadVCard() {
+    const vcardContent = `BEGIN:VCARD
 VERSION:4.0
 FN:Varun Sharma
 N:Sharma;Varun;;;
@@ -185,17 +183,21 @@ PHOTO;VALUE=uri:https://www.dropbox.com/scl/fi/rl658pssugdvroiu0vlkh/Untitled-de
 X-SOCIALPROFILE;TYPE=Instagram:https://instagram.com/paxotravels
 X-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/918003699526
 NOTE:Adventure Curator at Paxo Travels.
-END:VCARD`.trim();
+END:VCARD`;
 
-  // Generate the vCard file
-  const vCardBlob = new Blob([vcardContent], { type: "text/vcard" });
-  const vCardUrl = URL.createObjectURL(vCardBlob);
+    // Create a blob for the vCard content
+    const blob = new Blob([vcardContent], { type: 'text/vcard' });
 
-  // Generate QR Code for the vCard URL
-  QRCode.toCanvas(document.getElementById('qrcode'), vCardUrl, function (error) {
-    if (error) console.error(error);
-    console.log('QR code generated!');
-  });
+    // Create a temporary download link
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'VarunSharma.vcf'; // File name for the download
+
+    // Append link to the document, trigger download, and remove link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 </script>
 
 </body>
