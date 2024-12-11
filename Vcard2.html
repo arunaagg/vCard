@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Card with vCard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Import Font Awesome for the icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+    .card {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #f4ede0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+      text-align: center;
+      padding: 20px;
+    }
+    .card-header img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .card-header h2 {
+      margin: 5px 0;
+      font-size: 20px;
+      color: #333;
+    }
+    .card-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #777;
+    }
+    .card-buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 20px;
+      background-color: #e6e0d5;
+    }
+    .card-buttons a {
+      text-decoration: none;
+      color: #555;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card-buttons a:hover {
+      color: #000;
+    }
+    .card-content {
+      padding: 15px 20px;
+      text-align: center;
+    }
+    .card-content p {
+      font-size: 14px;
+      color: #555;
+      margin: 10px 0;
+    }
+    .card-contact {
+      padding: 15px 20px;
+    }
+    .card-contact div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .card-contact div span {
+      font-size: 14px;
+      color: #555;
+    }
+    .social-media {
+      text-align: center;
+      padding: 15px;
+    }
+    .social-media a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #555;
+      font-size: 20px;
+    }
+    .social-media a:hover {
+      color: #000;
+    }
+    .qr-section {
+      text-align: center;
+      padding: 20px;
+    }
+    .qr-section img {
+      width: 150px;
+      margin: 10px 0;
+    }
+    .qr-section a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #0066cc;
+    }
+    .qr-section a:hover {
+      text-decoration: underline;
+    }
+    /* Add to Contact button style */
+    .add-to-contact {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ff4d4d;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .add-to-contact:hover {
+      background-color: #ff3333;
+    }
+    .add-to-contact i {
+      font-size: 20px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <img src="https://www.dropbox.com/scl/fi/rl658pssugdvroiu0vlkh/Untitled-design-3.png?rlkey=20zto69rlxuj3bpc010b3d4bv&st=y25gu5x3&dl=1" alt="Profile">
+    <h2>Varun Sharma</h2>
+    <h3>Adventure Curator</h3>
+  </div>
+  <div class="card-buttons">
+    <a href="tel:+918003699526">📞 Call</a>
+    <a href="mailto:paxotravels@gmail.com">✉️ Email</a>
+  </div>
+  <div class="card-content">
+    <p><i>Journey to the Heart of Adventure.</i></p>
+  </div>
+  <div class="card-contact">
+    <div>
+      <span>📞 Phone: +91-8003699526</span>
+    </div>
+    <div>
+      <span>✉️ Email: paxotravels@gmail.com</span>
+    </div>
+  </div>
+  <div class="social-media">
+    <a href="https://instagram.com/paxotravels" target="_blank">📷 Instagram</a>
+    <a href="https://wa.me/918003699526" target="_blank">💬 WhatsApp</a>
+  </div>
+  <div class="qr-section">
+    <!-- QR Code for the vCard link -->
+    <div id="qrcode"></div>
+  </div>
+  <div style="text-align: center; padding: 15px;">
+    <span class="add-to-contact" onclick="window.location.href = 'vcard.vcf'">
+      <i class="fa fa-user-plus"></i> <!-- Icon with "+" and a person -->
+    </span>
+  </div>
+</div>
+
+<script>
+  // Define vCard content without address
+  const vcardContent = `BEGIN:VCARD
+VERSION:4.0
+FN:Varun Sharma
+N:Sharma;Varun;;;
+TITLE:Adventure Curator
+ORG:Paxo Travels
+TEL;TYPE=work,voice;VALUE=uri:tel:+918003699526
+EMAIL:paxotravels@gmail.com
+URL:https://instagram.com/paxotravels
+PHOTO;VALUE=uri:https://www.dropbox.com/scl/fi/rl658pssugdvroiu0vlkh/Untitled-design-3.png?rlkey=20zto69rlxuj3bpc010b3d4bv&st=qoqvczv5&dl=1
+X-SOCIALPROFILE;TYPE=Instagram:https://instagram.com/paxotravels
+X-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/918003699526
+NOTE:Adventure Curator at Paxo Travels.
+END:VCARD`.trim();
+
+  // Generate the vCard file
+  const vCardBlob = new Blob([vcardContent], { type: "text/vcard" });
+  const vCardUrl = URL.createObjectURL(vCardBlob);
+
+  // Generate QR Code for the vCard URL
+  QRCode.toCanvas(document.getElementById('qrcode'), vCardUrl, function (error) {
+    if (error) console.error(error);
+    console.log('QR code generated!');
+  });
+</script>
+
+</body>
+</html>
